@@ -301,3 +301,52 @@ v * c(2)
 
 ## Matrices and Arrays
 
+- A **matrix** in R is an two-dimensional object typically described as m x n (m rows by n columns)
+  - the data types must be the same (no mixing)
+  - the size is m * n (m times n)
+  - each element is referenced by two values – row and column
+
+![](images/matrix.png)
+
+- A matrix is created in R using the **matrix()** function
+  - e.g. to create a 2 x 2 matrix:
+
+```{r}
+A <- matrix(data=c(-3,2,893,0.17),nrow=2,ncol=2)
+A
+```
+
+- If the dimensions are left out, R defaults to a single column (ncol = 1)
+
+```{r}
+A <- matrix(data=c(-3,2,893,0.17))
+A
+```
+
+- If the dimensions are specified, the data vector **must provide the appropriate number of elements**
+  - Otherwise the data values will be recycled
+
+```{r}
+# create matrix with missing element
+A <- matrix(data=c(-3,2,893),nrow=2,ncol=2)
+A
+```
+
+- R fills matrices in column-wise, or column-major, order by default
+  - the **byrow** argument controls this, which is FALSE by default
+
+```{r}
+# fill column 1, then column 2, then column 3
+m <- matrix(data=c(10, 20, 30, 100, 200, 300),nrow=2,ncol=3)
+m
+#
+# same thing with byrow=F (the default)
+m <- matrix(data=c(10, 20, 30, 100, 200, 300),nrow=2,ncol=3, byrow=F)
+m
+#
+# now switch it up with byrow=T
+#
+m <- matrix(data=c(10, 20, 30, 100, 200, 300),nrow=2,ncol=3, byrow=T)
+m
+```
+
