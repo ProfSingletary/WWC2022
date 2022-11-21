@@ -350,3 +350,180 @@ m <- matrix(data=c(10, 20, 30, 100, 200, 300),nrow=2,ncol=3, byrow=T)
 m
 ```
 
+### Row and Column Bindings
+
+- Matrices can be created by using the **rbind** or **cbind** functions to bind vectors into a matrix by row or column, respectively
+
+```{r}
+rbind(1:3,4:6)
+cbind(c(1,4),c(2,5),c(3,6))
+```
+
+### Matrix Dimensions
+
+- The dim() function returns the dimensions of a matrix
+
+```{r}
+m <- rbind(7:9,6:8,5:7)
+m
+dim(m)
+#
+m2 <- cbind(c("x","y","z"),
+            c("pitch", "roll", "yaw"))
+m2
+dim(m2)
+```
+
+- ncol() and nrow() return the column and row dimensions
+
+```{r}
+m
+ncol(m)    # columns
+nrow(m)    # rows
+```
+
+### Matrix Extraction and Subsetting
+
+- Extraction/subsetting from a matrix is similar to vectors, but with an extra dimension
+
+```{r}
+m
+m[2,2] # 2nd row, 2nd column
+m[1,3] # 1st row, 3rd column
+m[2]   # 2nd row, defaults to column 1
+```
+
+### Row and Column Extraction
+
+- Omitting a dimension in a bracketed value extracts the entire row or column when the comma is included
+
+```{r}
+m
+m[,3]    # 3rd column (comma required)
+m[2,]    # 2nd row  (comma required)
+```
+
+- Simple extractions return a vector
+- More complicated extractions return a new matrix
+
+```{r}
+m
+# create a new matrix from m using
+# the 2nd and 3rd rows of original
+m[2:3,]
+```
+
+- The diag() function extracts the diagonal (as a vector) of a matrix
+
+```{r}
+m
+
+diag(m)
+
+m2
+
+diag(m2)
+```
+
+### Omitting Elements
+
+- Using negative indices removes elements
+
+```{r}
+m
+# remove 3rd column
+m[,-3]
+
+m
+# remove 1st row and
+# extract columns 2 and 3
+# in reverse order
+m[-1,3:2]
+```
+
+### Overwriting Matrix Elements
+
+- As with vectors, we can overwrite elements with new values
+
+```{r}
+m2 <- m    # copies m
+m
+m2
+# assign 10:12 to row 2
+m
+m2[2,] <- 10:12
+m2
+```
+
+- Recycling works with matrices
+
+```{r}
+m2 <- m
+m2
+# assign 10 to row 2
+m2[2,] <- 10
+m2
+```
+
+- Remember that the default fill order is column-wise
+
+```{r}
+m2 <- m
+m2
+m2[c(1,3),c(1,3)] <- c(99,111)
+m2
+```
+
+## Arrays
+
+- An array is "a vector with additional attributes giving the dimensions and (optionally) names for those dimensions"
+- It can have one, two, or more dimensions
+- A one-dimensional array is similar to a vector
+- A two-dimensional array is similar to a matrix
+- Arrays are handled differently by some functions
+
+### 3D Arrays
+
+- Specify the data and size. Fill order is column-wise
+  - 3rd dimension is sometimes known as a "layer" or "slice"
+
+```{r}
+# 2 is third dimension
+a <- array(data=1:24,dim=c(3,4,2))
+a
+```
+
+- Extracting rows from a 3D array returns the rows as **columns** in the resulting matrix
+
+```{r}
+a[2,,]
+```
+
+- We can extend arrays beyond 3 dimensions
+  - 4th dimension is viewed as "blocks" of 3D arrays
+
+```{r}
+a4 <- array(data=rep(1:24,times=3),dim=c(3,4,2,3))
+a4
+```
+
+- Extracting elements from multi-dimensional arrays is straightforward
+  - Be careful with the commas
+
+```{r}
+a4[2,2,2,2]  # 2nd row, 2nd column, 2nd layer, 2nd block
+a4[2,2,2,]   # 2nd row, 2nd column, 2nd layer of each block
+a4[2,2,,]    # 2nd row, 2nd column of each layer of each block
+```
+
+### Naming Array Dimensions
+
+- Naming dimensions (e.g. rows and columns) is important in R because we need to provide meaningful names for the components of our data
+  - Although arrays are not as commonly used as other data structures such as dataframes that we will discuss in the next module, we can use a simple example to demonstrate how it works for arrays
+
+```{r}
+ax <- array(data=1:9,dim=c(3,3),
+            dimnames=list(c("row1", "row2","row3"),
+                          c("col1","col2","col3")))
+ax
+```
