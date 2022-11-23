@@ -1,0 +1,43 @@
+---
+title: "Winter Working Connections 2022 Intro to R"
+output:
+  html_document:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+  markdown: 
+    wrap: 80
+---
+
+```{r rmarkdown-setup, echo = FALSE}
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+```
+
+## Day 1 Module 3
+
+## Extended Data Types and Data Structures
+
+### Non-Numeric Values
+
+- Logical values are TRUE and FALSE (or T and F)
+  - Logical values can be assigned to objects such as vectors and matrices
+
+```{r}
+x <- T
+x
+
+y <- FALSE
+y
+
+v <- c(T,T,F,F)
+v
+```
+
+### Relational Expressions
+
+- Relational expressions produce logical values using relational operators
+
+![](images/relational-expressions.png)
+
+
