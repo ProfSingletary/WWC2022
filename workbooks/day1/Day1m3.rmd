@@ -40,4 +40,60 @@ v
 
 ![](images/relational-expressions.png)
 
+### Relational Operator Examples
+
+```{r}
+1 == 2
+1 > 2
+1 < 2
+1 != 2
+
+x <- 10
+y <- 20
+x == y
+x < y
+x > y
+x != y
+```
+
+### Relational Operators with Vectors
+
+- R does an element by element comparison when a relation operator is applied
+
+```{r}
+v1 <- c(1,2,3,4)
+v2 <- c(2,2,3,4)
+v1 == v2
+
+v1 != v2
+
+v1 < v2
+
+v1 > v2
+```
+
+- Recycling works with relational operators
+
+```{r}
+v1 <- c(1,2,3,4)
+v1
+
+z <- c(2,3)
+z
+
+# compare 1,2,3,4 to (recycled) 2,3,2,3
+v1 < z
+```
+
+### Relational Operators with Matrices
+
+- Relational operators compare column-by-column
+
+```{r}
+m1 <- matrix(data=1:8,nrow=4)
+
+m1
+z1 <- c(2,3,4,5)
+m1 < z1   # compare column by column to z1
+```
 
