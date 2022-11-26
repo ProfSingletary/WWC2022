@@ -97,3 +97,59 @@ z1 <- c(2,3,4,5)
 m1 < z1   # compare column by column to z1
 ```
 
+### Logical Operators
+
+- Logical operators are useful for combining multiple relational expressions
+
+  - The result of any logical operator is a logical value of TRUE or FALSE
+  - R is unique in that it provides both single comparison logical AND and OR operators and element-wise AND and OR operator
+
+![](images/logical-operators.png)
+
+### Logical Operators: Long vs Short AND
+
+- '&' is element-wise ("long")
+
+```{r}
+x1 <- c(T, F, T, F)
+x2 <- c(T, T, T, T)
+x1 & x2
+```
+
+- '&&' is single comparison, compares first vector elements **only** ("short")
+
+```{r}
+x1 && x2
+x3 <- c(F, F, F, F)
+x1 && x2 && x3
+```
+
+### Logical Operators: Long vs Short OR
+
+- '|' is element-wise ("long")
+
+```{r}
+x1 <- c(T, F, T, F)
+x2 <- c(T, T, T, T)
+x1 | x2
+```
+
+- '||' is single comparison, compares first vector elements only ("short")
+
+```{r}
+x1 || x2
+x3 <- c(F, F, F, F)
+x1 || x2 || x3
+```
+
+### Logical Operators: NOT
+
+- The logical NOT operator inverts the value of a logical expression
+
+```{r}
+x1 && x2 && x3
+!(x1 && x2 && x3)
+x1 || x2 || x3
+!(x1 || x2 || x3)
+```
+
