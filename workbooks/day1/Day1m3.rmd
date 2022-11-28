@@ -153,3 +153,105 @@ x1 || x2 || x3
 !(x1 || x2 || x3)
 ```
 
+### Logical Operators: Order of Precedence
+
+- Logical AND operations have a higher precedence than OR
+  - Use parentheses to change the order of evaluation
+
+```{r}
+v1 <- c(2,3)
+v2 <- c(1,2)
+v3 <- c(3,4)
+(v1 < v2) & (v2 < v3)
+(v2 < v3) | (v1 < v3)
+
+# AND evaluates first by default
+(v1 < v2) & (v2 < v3) | (v1 < v3)
+
+# Relational comparisons (e.g. <) have higher precedence than
+# logical operators, so parentheses aren't required here,
+# but are useful for readability
+v1 < v2 & v2 < v3 | v1 < v3
+
+# modify so OR is evaluated first
+(v1 < v2) & ((v2 < v3) | (v1 < v3))
+```
+
+### Logical values as numbers
+
+- Logical values can be treated as numbers in R
+  - TRUE is treated like the number 1
+  - FALSE is treated like the number 0
+
+```{r}
+T+T        # 1 + 1
+F+T+F+T    # 0 + 1 + 0 + 1
+F+F        # 0 + 0
+```
+
+### Logical Subsetting
+
+- "Logical flag vectors" allow the selection of elements from a vector based on the logical flag value
+
+```{r}
+v <- c(10, 20, 30, 40)
+f <- c(F, T, F, T)
+
+# extract elements which align
+# with T in the flag vector f
+v[f]
+```
+
+- Logical subsetting can be used to extract elements based on a logical (TRUE or FALSE) condition
+
+```{r}
+v <- c(10, 20, 30, 40)
+# select all elements that are greater than 20
+v[v > 20]
+
+names <- c('David', 'Fred', 'Monica', 'Talia', 'Yolanda')
+# alphabetic comparison
+names[names > 'Monica']
+```
+
+- Logical subsetting can be used to selectively assign values
+
+```{r}
+v <- c(10, 20, 30, 40)
+# change values that are greater than 20 to 100
+v[v > 20] <- 100
+v
+
+names <- c('David', 'Fred', 'Monica', 'Talia', 'Yolanda')
+# use long form of 'Fred'
+names[names == 'Fred'] <- 'Frederick'
+names
+```
+
+- The which() function identifies the index values of elements which correspond to TRUE
+
+```{r}
+f <- c(F, T, F, T)
+which(f) # elements 2 and 4 are TRUE
+
+v <- c(0, 20, 100, 100)
+which(v < 100)  # elements 1 and 2 are less than 100
+```
+
+- Use which() to selectively remove values
+
+```{r}
+v <- c(0, 20, 100, 100)
+# remove anything greater than 100
+v[-which(v >= 100)]
+```
+
+- Logical subsetting also works with matrices
+
+```{r}
+m1 <- matrix(data=1:8,nrow=4)
+m1
+m1[m1 > 4] # find elements > 4
+m1[m1 > 4] <- 20 # replace elements greater than 4 with 20
+m1
+```

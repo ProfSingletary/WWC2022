@@ -1,0 +1,36 @@
+---
+title: "Winter Working Connections 2022 Intro to R"
+output:
+  html_document:
+    code_folding: show
+editor_options:
+  chunk_output_type: console
+  markdown: 
+    wrap: 80
+---
+
+```{r rmarkdown-setup, echo = FALSE}
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+```
+
+## Day 1 Module 4
+
+## Special Values and Coercion
+
+### Special Values
+
+- Many scenarios in R, and data science in general, call for special values
+  - missing data
+  - incorrect data
+  - corrupt data
+- Special values include
+  - Infinity: Inf is reserved for numbers too large to represent in R
+  - NaN ("not a number"): invalid numerical values, e.g. 0 / 0
+  - NA ("not available"): missing or invalid values (all types)
+  - NULL: an empty entity (vs. not available)
+
+
+
+
+
