@@ -255,3 +255,93 @@ m1[m1 > 4] # find elements > 4
 m1[m1 > 4] <- 20 # replace elements greater than 4 with 20
 m1
 ```
+
+## Character Strings in R
+
+- Character strings represent any textual data, including letters, numbers, and punctuation symbols
+- They are frequently used in R to redefine present **categorical** variables
+- Strings in R are occasionally formatted as extended regular expressions
+  - Regular expressions provide the ability for interesting string manipulations and also the opportunity to travel into a very deep rabbit hole (there are some very complex regular expressions)
+- Strings are delimited by either double or single quotes, double is preferred
+  - They are always displayed with double quotes
+
+```{r}
+s1 <- "Hello from Base R"
+s1
+
+s2 <- 'Hello from Base R'   # single quotes also work
+s2
+```
+
+- Any value can be represented as a character string
+  - Numeric operations cannot be performed in this form
+
+```{r}
+s1 <- "100"
+s2 <- "200"
+# s1 + s2   # uncomment and run to see the error
+```
+
+- String comparisons use standard relational operators
+  - ==   for equals
+  - !=    for not equals
+
+```{r}
+h1 <- "hello"
+h2 <- "Hello"
+
+h1 == h2
+
+h1 != h2
+```
+
+- A major difference between R and other programming languages is that R's comparisons are locale-dependent, instead of doing numeric comparisons using ASCII or Unicode values
+  - <, <=, >, >= will compare using a "collating order" (aka lexicographic)
+  - "Comparison of strings in character vectors is lexicographic within the strings using the collating sequence of the locale in use: see locales. The collating sequence of locales such as en_US is normally different from C (which uses ASCII) and can be surprising. Beware of making any assumptions about the collation order…" 
+
+  - <https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html>
+
+```{r}
+# case difference, upper case wins. In other languages 
+# which use ASCII/Unicode, this would be FALSE
+"hello" < "Hello"
+"Hallo" > "hello"  # case difference, but sequence has precedence
+```
+
+### Concatenation
+
+- R provides two functions for concatenation: cat() and paste()
+  - cat() sends results to the console and does not return any values
+  - paste() returns the concatenated result
+- both insert a space between
+
+```{r}
+s1 <- "100"
+s2 <- "Hello from Base R"
+v <- cat(s1,s2)
+v
+v <- paste(s1,s2)
+v
+```
+
+### Escape Sequences
+
+- The backslash is used to escape certain characters so they are interpreted as more than just simple symbols
+  - \n  (newline) is a typical example which inserts a newline (CR/LF) character into the output
+
+```{r}
+cat("hello,", "world")
+cat("hello,\n", "world")   # extra space between arguments
+cat("hello,\nworld")       # no extra space
+```
+
+### More Escape Sequences
+
+![](images/escape-sequences.png)
+
+```{r}
+s <- "\"tab \t BSyyy\b\""
+cat(s)
+```
+
+

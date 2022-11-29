@@ -16,3 +16,17 @@ knitr::opts_chunk$set(message = FALSE)
 
 ## Day 2 Module 6
 
+### Conditions and Loops
+
+- The **if** statement allows for conditional execution of code
+
+```{r}
+a <- 3
+myNumber <- 4
+if (a <= myNumber) {
+         a <- a^2
+         print('modifying a')
+}
+a
+```
+

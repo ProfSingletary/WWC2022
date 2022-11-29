@@ -16,3 +16,14 @@ knitr::opts_chunk$set(message = FALSE)
 
 ## Day 2 Module 5
 
+## Input, Output, and Functions
+
+### Bundled Datasets
+
+- data() displays data bundled with the R distribution
+
+```{r}
+data()
+```
+
+
