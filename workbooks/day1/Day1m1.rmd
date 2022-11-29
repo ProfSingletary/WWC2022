@@ -165,7 +165,7 @@ Common tools:
 ### Try it yourself! Get help for the cat function by typing in the box provided below by typing **?cat**
 
 ```{r}
-
+?cat
 ```
 
 ### Anatomy of an R Help Entry
@@ -605,5 +605,6 @@ citation()
 - Calling citation() with a package name will provide citation information for that packages
 
 ```{r}
-citation("tidyverse")
+#install.packages("tidyverse")
+#citation("tidyverse")
 ```
