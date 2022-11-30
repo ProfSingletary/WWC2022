@@ -605,5 +605,7 @@ citation()
 - Calling citation() with a package name will provide citation information for that packages
 
 ```{r}
+# need the package installed before it can be cited
+install.packages('tidyverse', repos='http://cran.us.r-project.org')
 citation("tidyverse")
 ```
