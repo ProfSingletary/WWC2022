@@ -23,10 +23,33 @@ knitr::opts_chunk$set(message = FALSE)
 ```{r}
 a <- 3
 myNumber <- 4
-if (a <= myNumber) {
+if (a <= myNumber) {   # end of line brace style
          a <- a^2
          print('modifying a')
 }
-a
+
+if (a <= myNumber) 
+{   # next line brace style
+         a <- a^2
+         print('modifying a')
+}
+```
+
+-- end of line or next line brace style is acceptable but be consistent
+
+![](images/brace-indentation.png)
+
+- For a single-line if statement body, braces are not required, but it doesn't hurt to use them anyway
+  - Using them can prevent subsequent defects when code is added to the body later
+  
+```{r}
+a <- 3
+myNumber <- 4
+if (a <= myNumber) # this works
+     a <- a^2
+
+if (a <= myNumber) { # but this is recommended
+     a <- a^2
+}
 ```
 
