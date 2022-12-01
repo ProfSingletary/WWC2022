@@ -605,12 +605,9 @@ citation()
 - Calling citation() with a package name will provide citation information for that packages
 
 ```{r}
-<<<<<<< HEAD
 # need the package installed before it can be cited
-install.packages('tidyverse', repos='http://cran.us.r-project.org')
+# try without specifying a mirror first, otherwise use 'repos' option
+install.packages('tidyverse')
+# install.packages('tidyverse', repos='http://cran.us.r-project.org')
 citation("tidyverse")
-=======
-#install.packages("tidyverse")
-#citation("tidyverse")
->>>>>>> faae0c0f49ed1eb9b2d7e25d55f80a7a3d087920
 ```
