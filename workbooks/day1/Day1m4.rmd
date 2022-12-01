@@ -30,7 +30,154 @@ knitr::opts_chunk$set(message = FALSE)
   - NA ("not available"): missing or invalid values (all types)
   - NULL: an empty entity (vs. not available)
 
+### Infinity (Inf)
+- The Inf keyword is case-sensitive
+- Positive and negative (-Inf) values supported
+- Actual value varies based on platform / available memory
+- Inf can be used in arithmetic operations
+
+```{r}
+
+9000^100
+
+9000^100 * -1
+
+Inf + 1
+
+Inf - 10000
+
+20000 / Inf
+
+Inf / 50
+
+```
+
+### Testing for Special Values
+- is.finite() and is.infinite() will test for finite/infinite values in vectors and matrices (but does not work with lists or data frames)
+
+```{r}
+x1 <- c(10, Inf, -50, -Inf, 9000^100)
+is.finite(x1)
+is.infinite(x1)
+
+m <- matrix(c(1,2,3,NA,5,6,NaN,8,Inf),nrow=3)
+is.infinite(m)
+
+df <- data.frame(col1=c(7,8,9),col2=c(10,11,Inf))
+#is.infinite(df) #will generate an error
+
+```
+
+### Testing for Special Values
+- is.na() and is.nan() will test for NA and NaN, respectively, although is.na will also include NaN values
+- is.na works with lists and data frames, is.nan does not
+```{r}
+x1 <- c(10, NA, -50, NaN, 9000^100)
+is.na(x1)
+
+is.nan(x1)
 
 
+df <- data.frame(col1=c(7,8,NaN),col2=c(10,11,NA))
+is.na(df)
 
+#is.nan(df) #will generate an error
+
+```
+
+### Object Attributes
+- Objects created in R can possess self-referential information known as attributes
+  - e.g. dimensions, levels, names
+- The attributes() function displays the attributes of an object
+
+```{r}
+m <- matrix(
+      c('hello','world',
+        'goodbye','charlotte'),
+      nrow= 2,ncol=2,
+      byrow=TRUE)
+
+m
+
+attributes(m)
+```
+
+- If you know the name of an attribute, you can also extract it with the attr() function
+
+```{r}
+
+dfm <- data.frame(
+        word1=c('hello','goodbye'),
+        word2=c('world','charlotte'))
+
+dfm
+
+attributes(dfm)
+
+attr(x=dfm,which='names')
+```
+
+### Unspecified Attributes
+- Attributes vary by object type
+- Some attributes are NULL if not specified
+
+```{r}
+m <- matrix(c('hello','world','goodbye','charlotte'),
+              nrow= 2,ncol=2,byrow=TRUE)
+
+attributes(m)
+
+attr(x=m,which='dimnames')
+
+```
+
+### Setting Attributes
+- Attributes can be set by name when an object is created
+
+```{r}
+m <- matrix(
+     c('hello','world','goodbye','charlotte'),
+     nrow=2,ncol=2,byrow=TRUE,
+     dimnames=list(c('phrase1','phrase2'),
+                   c('word1','word2')))
+
+m
+
+attributes(m)
+
+
+```
+
+### Creating Attributes
+- New attributes can be created using the attr() function
+
+```{r}
+attr(m, "values") <- c("letters", "numbers")
+attributes(m)
+
+```
+
+### Object Class
+- R is an object-oriented language
+  - Each object has at least one class attribute used to describe it
+- The class() function will report the class attribute value
+  - For vectors (only), class() reports the type of data stored
+
+```{r}
+v <- c("hello", "world")
+v
+class(v)
+
+
+m2 <- matrix(1:9, nrow=3 )
+dimnames(m2) <- list(c("A", "B","C"), c( "D", "E", "F"))
+m2
+
+class(m2)
+
+dfm
+
+class(dfm)
+
+```
 
