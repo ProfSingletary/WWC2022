@@ -56,12 +56,23 @@ ChickWeight[1:15,]
 ![](images/mydatafile.png)
 
 - read.table() reads a text file in as a data frame
-  - Use stringsAsFactors=F to prevent conversion to factors
+  - Use stringsAsFactors=T to convert strings to factors
+    (default of TRUE was deprecated in Rv4)
   - Use skip=n to skip n lines before beginning to read
-
+  - getwd() gets current working folder
+  - setwd() sets current working folder
+  - list.files() lists files in folder
+  
 ```{r}
-mydatafile <- read.table('mydatafile.txt', 
-                           header=T, sep=' ', 
-                           na.string='*')
-mydatafile
+fileName = "mydatafile.txt"
+#fileURL = "https:///github.com/ProfSingletary/WWC2022/blob/main/workbooks/day2/mydatafile.txt"
+datafile <- read.table(fileName,
+                       header=T, sep=' ', 
+                       na.string='*')
+datafile
+
+getwd()
+#setwd()
+#list.files()
 ```
+
