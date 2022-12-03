@@ -516,17 +516,15 @@ sample(size=1, x=die)
 ```
 
 -   If you do not specify the argument names, you must be sure to pass the
-    arguments in the correct order. Try **sample(1, die)** and see what happens
-    -- the normal order is sample(die, 1)
+    arguments in the correct order. 
+-   Uncomment the code below and see what happens when you execute it (hint: an error occurs)
+    -- the required order is sample(die, 1)
 
 ```{r}
-sample(1, die)
-sample(1, die)
-sample(1, die)
+#sample(1, die)
 ```
 
--   In this example, we get 1, repeatedly, since sample() is taking a sample
-    from a "vector" containing only the number 1, so that's all it can produce
+-   In this example, we get an error on the 'die' argument if it is specified as the size
 
 -   If you aren't sure of the argument ordering or argument names, you can call
     the args() function with the function name to find out:
