@@ -64,15 +64,69 @@ ChickWeight[1:15,]
   - list.files() lists files in folder
   
 ```{r}
-fileName = "mydatafile.txt"
-#fileURL = "https:///github.com/ProfSingletary/WWC2022/blob/main/workbooks/day2/mydatafile.txt"
-datafile <- read.table(fileName,
-                       header=T, sep=' ', 
-                       na.string='*')
-datafile
+# this code needs tweaking to execute, depending on the location of the ifle
+#fileName = "mydatafile.txt"
+# here is the URL of the file for download
+# fileURL = "https:///github.com/ProfSingletary/WWC2022/blob/main/workbooks/day2/mydatafile.txt"
+#datafile <- read.table(fileName,
+#                       header=T, sep=' ', 
+#                       na.string='*')
+#datafile
 
 getwd()
 #setwd()
 #list.files()
 ```
+
+### Converting Strings to Factors
+
+```{r}
+# create the dataframe if file cannot be read
+person <- c('Peter', 'Lois', 'Meg', 'Chris', 'Stewie', 'Brian')
+age <- c(NA, 40, 17, 14, 1, NA)
+sex <- c('M', 'F', 'F', 'M', 'M', 'M')
+funny <- c('High', NA, 'Low', 'Med', 'High', 'Med')
+age.mon <- c(504, 480, 204, 168, NA, NA)
+mydatafile <- data.frame(person, age, sex, funny, age.mon)
+mydatafile
+```
+
+- as.factor() can be used to convert character strings read from files
+
+```{r}
+str(mydatafile$sex)
+mydatafile$sex <- as.factor(mydatafile$sex)
+
+str(mydatafile$sex)
+mydatafile$funny <- factor(x=mydatafile$funny, 
+                          levels=c("Low","Med","High"))
+str(mydatafile$funny)
+```
+
+### Writing Text Files
+
+- write.table() and write.csv() write data to files
+  - Can specify whether to enclose non-numeric entries in quotes
+  - Can specify whether to include row names
+
+```{r}
+#
+write.table(x=mydatafile,file='mydatafile-new.txt',
+            sep=',',na='NNN',quote=F,row.names=F)
+```
+
+- mydatafile-new.txt file now contains
+
+  - person,age,sex,funny,age.mon
+  - Peter,NNN,M,High,504
+  - Lois,40,F,NNN,480
+  - Meg,17,F,Low,204
+  - Chris,14,M,Med,168
+  - Stewie,1,M,High,NNN
+  - Brian,NNN,M,Med,NNN
+
+## Calling Functions
+
+
+
 
