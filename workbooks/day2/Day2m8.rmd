@@ -16,3 +16,12 @@ knitr::opts_chunk$set(message = FALSE)
 
 ## Day 2 Module 8
 
+## Advanaced Statistics in R
+
+### Sampling Distributions and Confidence
+
+- A **sampling distribution** is a probability distribution that accounts for variability when population parameters are estimated using sample statistics.
+  - Modeling variability in an estimated sample statistic is a key part of many statistical analyses.
+- The sampling mean ("X-bar") is calculated using a smaller number of observations, so variability can decrease compared to a population mean.
+- The sampling standard deviation is referred to as the **standard error**  ("sigma-X-bar") reflecting the fact that the probabilities are calculated from a sample.
+- The formulas for sampling distributions depend upon the probability distributions that generated the raw data, availability of measures of the population mean and standard deviation, and the size of the sample itself.

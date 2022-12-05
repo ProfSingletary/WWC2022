@@ -16,3 +16,25 @@ knitr::opts_chunk$set(message = FALSE)
 
 ## Day 2 Module 7
 
+## Basic Statistics in R
+
+### Numeric Variables
+
+- There are two basic types of numeric variables in statistics:
+  - **continuous** variables: any value in some interval, up to any number of decimals        - (which technically gives an infinite number of possible values) e.g.
+    - 1.1, -3.0, 1678.5323
+  - **discrete** variables: only distinct numeric values
+    - If the range is restricted, then the number of possible values is finite
+    - e.g. 1, -27, 101, 3108
+
+### Univariate and Multivariate Data
+
+- **Univariate** data refers to the use of a single relevant variable
+  - e.g. the weight of a car
+- **Multivariate** data consist of multiple variables, where their individual components aren't useful in a particular statistical analysis
+  - Bivariate is sometimes considered a sub-category of multivariate, referring specifically to two variables considered together, but can also considered distinct from a multivariate analysis which requires three or more variables
+  - Bivariate can be easily plotted on an x- and y- axis
+  - Multivariate depends on analysis context
+    - e.g. an analysis requires height and weight as dependent variables
+    - e.g. a geographic location measured in three dimensions (latitude, longitude, and altitude)
+

@@ -53,3 +53,54 @@ if (a <= myNumber) { # but this is recommended
 }
 ```
 
+- Conditions in if statements may be relational or logical expressions
+
+```{r}
+myvec <- c(2.73, 5.40, 2.15, 5.29, 1.36, 2.16, 1.41, 6.97, 7.99, 9.52)
+mymatrix <- matrix(c(2,0,1,2,3,0,3,0,1,1), nrow=5, ncol=2)
+myvec
+mymatrix
+
+if (any((myvec - 1) > 9) || matrix(myvec, 2, 5)[2,1] <= 6) {
+    new.myvec <- myvec
+    new.myvec[seq(1,9,2)] <- NA
+    mylist <- list(aa=new.myvec, bb=mymatrix + 0.05)
+    cat("new list:\n")
+    mylist
+}
+```
+
+![](images/if-statement-explained.png)
+
+- Else statements provide an alternative path for code to follow if an if condition is FALSE
+
+- if (condition) {
+-     # statements executed if condition is true
+- } else {
+-     # statements executed if condition is false
+- }
+
+```{r}
+a <- 5
+myNumber <- 4
+if (a <= myNumber) {
+      a <- a^2
+} else {
+      a <- a - 3.5
+}
+a
+```
+
+### Limitations of if in R
+
+- An if statement can check the condition of only **a single logical value**.
+  - If you pass in a vector of logicals for the condition, the if statement will only check the very first element and a warning is displayed, e.g.
+
+```{r}
+if (c(FALSE,TRUE,FALSE,TRUE,TRUE))  { }
+```
+
+- displays
+  - Warning message:
+  - In if (c(FALSE, TRUE, FALSE, TRUE, TRUE)) { :
+  - the condition has length > 1 and only the first element will be used
