@@ -16,3 +16,33 @@ knitr::opts_chunk$set(message = FALSE)
 
 ## Day 3 Module 9
 
+## Advanced Statistics in R: Regression
+
+### Simple Linear Regression
+
+-0 Linear regression explains the relationship between a dependent variable and one or more independent variables
+  - Other names for the dependent variable: outcome variable, response variable
+  - Other names for the independent variable: predictor variable, explanatory variable
+  - An example follows which uses the Rbase MASS dataset
+
+```{r}
+library(MASS)
+? survey
+```
+
+### MASS Survey DataFormat
+![](images/mass-survey-dataformat.png)
+
+- Plot student height vs. writing-hand handspan
+  - Note the use of formula notation ~ 
+  - "height is a function of handspan"
+    - or 
+  - "height on handspan"
+- Clustering indicates a positive linear relationship
+
+```{r}
+plot(survey$Height ~ survey$Wr.Hnd,
+     xlab="Writing handspan (cm)",
+     ylab="Height (cm)")
+```
+
