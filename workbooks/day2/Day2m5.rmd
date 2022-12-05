@@ -127,6 +127,73 @@ write.table(x=mydatafile,file='mydatafile-new.txt',
 
 ## Calling Functions
 
+### Reserved Names
 
+- Some reserved names exist in R and cannot be used to name objects or functions
+  - if / else
+  - for / while / in
+  - function
+  - repeat / break / next
+  - TRUE / FALSE
+  - Inf / -Inf
+  - NA, NaN, NULL
 
+- It is not a good practice to use mixed case to bypass the reserved name restrictions:
 
+  - False <- TRUE   # this is very confusing
+  - nan <- "not"
+
+- The same guidance applies to abbreviations, which are not reserved:
+
+  - T <- 42         # allowed, but confusing
+  - F <- TRUE
+
+### Argument Matching
+
+- There are various ways to match arguments when calling functions
+- Exact argument matching: explicit specification of argument tags
+  - e.g. 'dimnames'
+  - cumbersome for simple operations, but avoids ordering or skipping issues
+
+```{r}
+bar <- matrix(data=1:9, nrow=3, ncol=3, 
+              dimnames=list(c("A","B","C"),c("D","E","F")))
+```
+
+- Partial matching allows matching of arguments with an abbreviated tag
+  - Also supports reordering
+
+```{r}
+bar <- matrix(dat=1:9, nr=3, nc=3, 
+              di=list(c("A","B", "C"),c("D","E","F")))
+```
+
+- Positional matching allows untagged arguments
+  - Ordering must be preserved
+  - Use args() function to verify usage
+
+```{r}
+bar <- matrix(1:9, 3, 3, F,   # byrow argument required for all positional
+              list(c("A","B", "C"),c("D","E","F")))
+```
+
+- Mixed matching
+  - matching types can be combined
+  - e.g. start with positional, then use partial
+
+```{r}
+bar <- matrix(1:9, 3, 3, # byrow not required here since dimnames specified
+              dim=list(c("A","B", "C"),c("D","E","F")))
+```
+
+### Variadic (varargs)
+
+- **Variadic** functions accept variable numbers of arguments
+  - Ellipses  …   support this feature in R 
+  - FYI **ellipses** is plural, **ellipsis** is singular
+  - Any arguments not matched to tags provided are matched to the ellipsis
+  - Frequently used to pass secondary objects to sub-functions called within another function
+
+```{r} 
+args(data.frame)
+```
