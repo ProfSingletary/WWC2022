@@ -46,3 +46,20 @@ plot(survey$Height ~ survey$Wr.Hnd,
      ylab="Height (cm)")
 ```
 
+- The dataset contains some missing values, we can use which(is.na …) to find them
+
+```{r}
+which(is.na(survey$Height) | is.na(survey$Wr.Hnd))
+incomplete.obs <- which(is.na(survey$Height)|is.na(survey$Wr.Hnd))
+length(incomplete.obs)
+```
+
+### Correlation Coefficient
+
+- Calculate the correlation coefficient using cor( ) function to assess strength of the relationship
+  - Range of coefficient values is -1 to +1, where -1 is a perfect negative correlation and +1 is a perfect positive correlation
+    - "use" parameter indicates method for dealing with missing values; "complete.obs" means missing values are handled by casewise deletion (and if there are no complete cases, that gives an error)
+
+```{r}
+cor(survey$Wr.Hnd,survey$Height,use="complete.obs")
+```
