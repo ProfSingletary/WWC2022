@@ -104,3 +104,69 @@ if (c(FALSE,TRUE,FALSE,TRUE,TRUE))  { }
   - Warning message:
   - In if (c(FALSE, TRUE, FALSE, TRUE, TRUE)) { :
   - the condition has length > 1 and only the first element will be used
+  
+### ifelse for Logical Vectors
+
+- **Description**
+- ifelse returns a value with the same shape as test which is filled with elements selected from either yes or no depending on whether the element of test is TRUE or FALSE.
+- **Usage**
+- ifelse(test, yes, no)
+- **Arguments**
+- test	
+  - an object which can be coerced to a logical value
+- yes	
+  - return values for true elements of test.
+- no	
+  - return values for false elements of test.
+
+```{r}
+x <- 5
+y <- -5:5
+y
+result <- ifelse(test= y == 0, yes = NA, no = x)
+result
+```
+
+- An if statement can be placed within another if statement
+
+![](images/nestedif.png)
+
+- If statements can be sequentially stacked
+
+![](images/stackedif.png)
+
+### The Switch Statement
+
+- switch() provides an alternative to complex stacked sequences
+
+```{r}
+mystring="Bart"
+
+foo <- switch(EXPR=mystring, 
+           Homer=12,
+           Marge=34,
+           Bart=56,
+           Lisa=78,
+           Maggie=90,
+           NA
+         )
+foo
+
+# is equivalent to
+
+if(mystring=="Homer") {
+      foo <- 12
+} else if(mystring=="Marge") {
+      foo <- 34
+} else if(mystring=="Bart") {
+      foo <- 56
+} else if(mystring=="Lisa") {
+      foo <- 78
+} else if(mystring=="Maggie") {
+      foo <- 90
+} else {
+      foo <- NA
+}
+foo
+```
+
