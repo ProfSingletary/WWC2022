@@ -170,3 +170,45 @@ if(mystring=="Homer") {
 foo
 ```
 
+### For Loops
+
+- The for loop iterates through elements in an object
+
+```{r}
+for(myitem in 5:7) {
+  cat("the current item is",myitem,"\n")
+}
+```
+
+- Vector elements in a for loop can be accessed by a variable named in the loop header or by an index
+
+```{r}
+# the following examples are equivalent:
+myvec <- c(0.4,1.1,0.34,0.55)
+for(i in myvec) {
+    print(2 * i)
+}
+
+for(i in 1:length(myvec)) {
+    print(2 * myvec[i])
+}
+```
+
+- Preallocating output objects makes loop processing much more efficient
+  - Time the following operations and compare their performance
+
+```{r}
+system.time({
+  output <- rep(NA, 10000000);  # preallocate output object
+  for (i in 1:10000000) {
+    output[i] <- i + 1
+  }
+})
+
+system.time({
+  output <- NA;                 # dynamically resize output object
+  for (i in 1:10000000) {
+    output[i] <- i + 1
+  }
+})
+```
