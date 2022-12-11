@@ -212,3 +212,64 @@ system.time({
   }
 })
 ```
+
+- For loops can be nested
+  - Align/indent for readability
+  - Variable used in header must be unique
+
+```{r}
+loopvec1 <- c(1, 2, 3)
+loopvec2 <- c(5, 10, 15)
+result <- NULL
+count <- 1
+for (i in 1:length(loopvec1)) {
+    for (j in 1:length(loopvec2)) {
+        result[count] <- loopvec1[i]*loopvec2[j]
+        count <- count + 1
+    }
+}
+result
+```
+
+### While and Repeat Loops
+
+- The while loop runs code while a certain condition remains TRUE
+
+  - while (condition) {
+    - code
+  - }
+  
+```{r}
+i <- 1
+while (i < 6) {
+  print(i)
+  i <- i + 1
+}
+```
+
+- The repeat loop will run code until the Escape key is pressed or the code encounters a break command
+
+  - repeat {
+    - code
+    - if (condition) {
+      - break
+    - }
+  - }
+
+```{r}
+x <- 1
+# Repeat loop
+repeat {
+    print(x)
+    
+    # break statement to terminate if x > 4
+    # comment out for infinite version, 
+    # <Esc> required to terminate
+    if (x > 4) {
+        break
+    } 
+    
+    # Increment x by 1
+    x <- x + 1
+}
+```
