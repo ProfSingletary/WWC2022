@@ -8,7 +8,7 @@ date: "2022-12-01"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-###Module 1 Exercise
+### Module 1 Exercise
 
 - Create an R script which performs the following three tasks:
 
@@ -31,4 +31,27 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 
+```
+
+### Module 3 Exercise
+
+- Create and save the following data as a data frame, where the PERSON column is a character string and both GENDER and FUNNY columns are factors with M/F and Low/Med/High as levels, respectively.
+
+![](images/ex3table.png)
+
+- Use the str() function to verify the characteristics of each column.
+
+- Add an AGE column to the data frame with the following ages:
+
+![](images/ex3ages.png)
+
+- Then use column indexing to swap the AGE and FUNNY columns so AGE is the 3rd column and FUNNY is the 4th column.
+
+- Add the following row to your data frame: "Sally", "F", 37, "High".
+
+- Note that at this point str() indicates the AGE column is a character vector, not numeric. Convert that column to numeric.
+
+- Display your final data frame and verify its structure (chr, factor, num, factor).
+
+```{r}
 ```

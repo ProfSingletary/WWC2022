@@ -8,7 +8,7 @@ date: "2022-12-01"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-###Module 1 Exercise
+### Module 1 Exercise
 
 - Create an R script which performs the following three tasks:
 
@@ -92,4 +92,52 @@ a[2,2,1]
 # the array produced in step d by 8.
 a2 <- a * a[2,2,1]
 a2
+```
+
+### Module 3 Exercise
+
+- Create and save the following data as a data frame, where the PERSON column is a character string and both GENDER and FUNNY columns are factors with M/F and Low/Med/High as levels, respectively.
+
+![](images/ex3table.png)
+
+- Use the str() function to verify the characteristics of each column.
+
+- Add an AGE column to the data frame with the following ages:
+
+![](images/ex3ages.png)
+
+- Then use column indexing to swap the AGE and FUNNY columns so AGE is the 3rd column and FUNNY is the 4th column.
+
+- Add the following row to your data frame: "Sally", "F", 37, "High".
+
+- Note that at this point str() indicates the AGE column is a character vector, not numeric. Convert that column to numeric.
+
+- Display your final data frame and verify its structure (chr, factor, num, factor).
+
+```{r}
+# create the data frame
+dframe <- data.frame(
+            PERSON=c("Stan","Francine","Steve","Roger","Hayley","Klaus"),
+            GENDER=factor(x=c("M","F","M","M","F","M")),
+            FUNNY=factor(x=c("High","Med","Low","High","Med","Med"),
+                              levels=c("Low","Med","High")))
+
+# verify the column structure
+str(dframe)
+
+# add an AGE column
+dframe$AGE <- c(41,28,33,56,45,60)
+
+# reorder columns 3 and 4
+dframe <- dframe[,c(1,2,4,3)]
+
+# add the new row
+dframe <- rbind(dframe, c("Sally", "F", 37, "High"))
+
+# change AGE from character to numeric
+dframe$AGE <- as.numeric(dframe$AGE)
+
+# display dataframe and verify structure
+View(dframe)
+str(dframe)
 ```
