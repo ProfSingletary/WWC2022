@@ -75,14 +75,18 @@ knitr::opts_chunk$set(message = FALSE)
         -   demonstrate the relationship between two variables
 -   Given the weight (in lbs) for various pumpkin samples in the "Medium" size
     category, use R to calculate various summary data values
+    
+### Pumpkin Data!
 
 ![](images/pumpkin-data.png)
 
+- "2007 Evaluation of Pumpkin Varieties for the Southeast"
 <http://vegetables.tennessee.edu/Pumpkin/pumpkin2007_1.html>
-(note: this link is now broken :( )
+- (note: this link is now broken)
+- Immature pumpkins are unripe pumpkins
 
 ```{r}
-weights <- c(23.7,23.7,23.6,21.4,19.9,19.7,
+weights <- c(23.7,23.7,23.6,21.4,19.9,19.7,    # Medium category only
             17.9,17.8,17.6,15.2,14.7)
 meanw <- mean(weights)    # mean
 medw <- median(weights)   # median
@@ -92,6 +96,7 @@ range <- max(weights) - min(weights)  # range
 range
 ```
 
+- The mode is the value that appears most frequently in a data set.
 - R has no statistical  "mode" function 
   - mode() in R is not the same (look it up)
   - A custom mode function can be written, many examples are available on the web
@@ -126,7 +131,7 @@ pumpkin <- read.csv("pumpkin.csv")
 # set the column names
 names(pumpkin) <- c("Size","Num_Immature_Acre",
                     "Percent_Immature","Avg_lb")
-# find the mean per size cateogory
+# find the mean per size category
 result <- tapply(pumpkin$Avg_lb,INDEX=pumpkin$Size,FUN=mean)
 # it's alphabetical, sort it numerically
 sort(result,decreasing=TRUE)
@@ -135,3 +140,70 @@ result <- tapply(pumpkin$Avg_lb,INDEX=pumpkin$Size,FUN=getmode)
 # sort it
 sort(result,decreasing=TRUE)
 ```
+
+### Quantiles
+
+- A quantile is a value computed from a collection of numeric measurements that indicates an observation’s rank when compared to all the other observations
+  - The median is a quantile which gives you a value below which half of the measurements lie, the 0.5th quantile
+  - Quantiles are commonly expressed as a percentile on a “percent scale” of 0 to 100
+  
+```{r}
+quantile(pumpkin$Avg_lb)
+```
+
+- Box plots (also known as "box and whisker" plots) are frequently used to represent percentiles (also known as "Five Number Summary Box Plots")
+
+```{r}
+boxplot(pumpkin$Avg_lb, horizontal=T, range=0)
+```
+
+### Variance
+
+- Variance ("spread") measures dispersion of a dataset, ie. how spread out points are from the mean and one another
+  - Variance of 0 means points are all the same
+  - The var() function calculates sample variance
+  - var() result is the square of the original sample data unit
+    - e.g. if data is in feet, var() unit is square feet
+  - as sample size increases, var() approaches population variance
+  - var() is the square of the standard deviation sd()
+
+```{r}
+var(weights)         # variance of medium pumpkin category
+var(pumpkin$Avg_lb)  # variance of all pumpkin weight categories
+
+# plot the data to visualize it!
+plot(weights, xlim=c(0,30), ylim=c(0,65))
+abline(h=mean(weights),lwd=2,lty=3, col="gray")
+
+plot(pumpkin$Avg_lb, xlim=c(0,30), ylim=c(0,65))
+abline(h=mean(pumpkin$Avg_lb),lwd=2,lty=3, col="gray")
+```
+
+### Covariance and Correlation
+
+- Covariance expresses how much two numeric variables “change together”
+  - A positive covariance result shows that there is a positive linear relationship between the variables: as x increases, y increases
+  - A negative covariance result shows a negative linear relationship: as x increases, y decreases
+  - A covariance of 0 indicates no relationship
+  - To calculate covariance, use the cov() function
+- Correlation allows you to interpret covariance by identifying both the direction and the strength of any association
+  - To calculate correlation, use the cor() function
+
+```{r}
+# show covariance, correlation and scatter plot for all pumpkins
+# percent immature vs. weight
+cov(pumpkin$Percent_Immature,pumpkin$Avg_lb)
+cor(pumpkin$Percent_Immature,pumpkin$Avg_lb)
+plot(pumpkin$Percent_Immature,pumpkin$Avg_lb)
+
+# show covariance, correlation and scatter plot for medium category
+# percent immature vs. weight
+perc_imm <- pumpkin[10:20,3]
+cov(perc_imm,weights)
+cor(perc_imm,weights)
+plot(perc_imm,weights)
+```
+
+
+  
+

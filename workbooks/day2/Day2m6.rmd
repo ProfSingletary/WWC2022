@@ -273,3 +273,99 @@ repeat {
     x <- x + 1
 }
 ```
+
+- Any number of loops can be nested
+  - The computational cost can become a problem if done unwisely
+  - Many loops can also be replaced by vector operations
+
+  - The following function uses a loop that is not vectorized, the loop  manipulates each element of the vector one at a time
+
+```{r}
+abs_loop <- function(vec) {   # create a function to set abs value
+    for (i in 1:length(vec)) {
+        if (vec[i] < 0) {
+            vec[i] <- -vec[i]
+        }
+    }
+    vec
+}
+abs_loop(-10000:-1)   # call the function
+```
+
+- abs_vec (below) is vectorized
+  - It uses logical subsetting to manipulate every negative number in the vector at the same time
+  - This is much faster than abs_loop because it relies on operations that R does quickly: logical tests, subsetting, and element-wise execution
+
+```{r}
+abs_vec <- function(vec) {  # create a function to set abs value
+    negs <- vec < 0
+    vec[negs] <- vec[negs] * -1
+    vec
+}
+abs_vec(-10000:-1)   # call the function
+```
+
+- You can use R’s <- assignment operator, which is also vectorized, to save a new set of values over an old set
+
+```{r}
+vec <- c(1, -2, 3, -4, 5, -6, 7, -8, 9, -10)
+vec
+vec[vec <  0] <- vec[vec < 0] * -1
+vec
+```
+
+### Loop Guidelines
+
+- If you can avoid loops using vectorization, you should do so
+  - A good way to spot loops that could be vectorized is to look for combinations of if and a loop
+  - if can only be applied to one value at a time
+  - This combination can usually be replaced with logical subsetting, which will do the same thing but run much faster
+  - There are operations that cannot be vectorized and require loops
+- You can dramatically increase the speed of your loops by:
+  - doing as much as you can outside of the loop
+  - making sure that any storage objects that you use with the loop are preallocated
+
+### Implicit Looping with Apply()
+
+- In some situations, especially for relatively routine loops (such as executing some function on each member of a list), you can avoid some of the details associated with explicit looping by using the apply function
+- The apply function is the most basic form of implicit looping; it takes a function and applies it to each margin (see below) of a data structure
+
+  - MARGIN = 1 function is applied over rows
+  - MARGIN = 2 function is applied over columns
+
+```{r}
+foo <- matrix(1:12,4,3)
+foo
+# find the sum using a for loop (by rows)
+row.totals.looprow <- rep(NA,times=nrow(foo))
+for(i in 1:nrow(foo)) {
+    row.totals.looprow[i] <- sum(foo[i,])
+}
+row.totals.looprow
+
+# find the sum using a for loop (by columns)
+row.totals.loopcol <- rep(NA,times=ncol(foo))
+for(i in 1:ncol(foo)) {
+    row.totals.loopcol[i] <- sum(foo[,i])
+}
+row.totals.loopcol
+
+# find the sum using apply
+# by rows
+row.totals.row <- apply(X=foo, MARGIN=1, FUN=sum)
+row.totals.row
+
+# by columns
+row.totals.col <- apply(X=foo, MARGIN=2, FUN=sum)
+row.totals.col
+```
+
+### Apply Variations
+
+- There are different flavors of the basic apply function
+  - The tapply function performs operations on subsets of the object of interest, where those subsets are defined in terms of one or more factor vectors
+  - lapply operates member by member on a list
+  - sapply returns the same results as lapply but in an array form
+  - All apply functions allow for additional arguments to be passed to FUN; most via an ellipsis
+
+
