@@ -189,6 +189,8 @@ abline(h=mean(pumpkin$Avg_lb),lwd=2,lty=3, col="gray")
 - Correlation allows you to interpret covariance by identifying both the direction and the strength of any association
   - To calculate correlation, use the cor() function
 
+![](images/correlation-values.png)
+
 ```{r}
 # show covariance, correlation and scatter plot for all pumpkins
 # percent immature vs. weight
@@ -204,6 +206,130 @@ cor(perc_imm,weights)
 plot(perc_imm,weights)
 ```
 
+- Example using mtcars dataset
 
+```{r}
+cov(mtcars$cyl,mtcars$mpg)
+cor(mtcars$cyl,mtcars$mpg)
+plot(mtcars$cyl, mtcars$mpg)
+```
+
+### Outliers
+
+- An outlier is an observation that does not fit with the rest of the data
+  - A noticeable extreme when compared with the bulk of the data
+  - Outliers can occur naturally, where the outlier is an accurate observation recorded from the population, or unnaturally, where something has "contaminated" the sample, such as incorrect input
+  - It is common to omit any outliers occurring through unnatural sources prior to analysis if they can be found
+  - Identifying outliers is important because of the potential impact they can have on any statistical calculation 
+  - Researchers try to identify possible outliers before computing results by conducting an exploratory analysis of their data using basic summary statistics and data visualization tools
+  - In some cases, researchers conduct their analysis both ways, presenting results including and excluding perceived outliers
+
+### Basic Data Visualization
+
+- Barplots are commonly used to visualize qualitative data by category frequency.
+
+- A barplot draws either vertical or horizontal bars, typically separated by white space, to visualize frequencies according to the relevant categories.
+
+![](images/barchart-example.png)
+
+```{r}
+# create a barplot from mtcars Dataset
+# plot observations per cylinder (cyl) 
+mtcars[1:5,]
+cyl.freq <- table(mtcars$cyl)  # table() tabulates values
+cyl.freq
+barplot(cyl.freq)
+```
+
+```{r}
+rain <- c(3, 5, 7, 5, 3, 2, 6, 8, 5, 6, 9, 8)
+barplot(rain, names = month.abb)
+```
+
+### Customizing Barplots
+
+![](images/barchart-options.png)
+
+```{r}
+barplot(rain, xlab = 'Month', ylab = 'Rainfall cm',
+        ylim = c(0,10), col = 'lightblue')
+ 
+abline(h = seq(1,9,2), lty = 2, lwd = 0.5, col = 'gray40')
+
+box() # draw box around plot
+```
+
+### Stem and Leaf Plots
+
+- A stem and leaf plot is a special table where each data value is split into a "stem" (the first digit or digits) and a "leaf" (usually the last digit).
+
+![](images/stem-and-leaf.png)
+
+- Example: A statistician for a basketball team tracked the number of points that each of 12 players on the team had in one game, and then made a stem-and-leaf plot to show the data.
+
+![](images/stem-and-leaf2.png)
+
+```{r}
+data <- c(3, 5, 7, 5, 3, 2, 6, 8, 5, 6, 9, 4, 5, 7, 3, 4)
+stem(data)
+```
+
+![](images/stem-and-leaf2-output.png)
+
+### Increasing the Number of Bins
+
+```{r}
+stem(data, scale=2)
+```
+
+### Stem and Leaf with Real Numbers
+```{r}
+data2 <- c(23.0, 17.0, 12.5, 11.0, 17.0, 12.0,  14.5,  
+           9.0, 11.0, 9.0, 12.5, 14.5, 17.0, 8.0, 21.0)
+
+stem(data2, scale=2)
+```
+
+### Histograms
+
+- The barplot is sensible for counting observations in relation to categorical variables but is of virtually no use if the variable you’re interested in is numeric/continuous
+  - Stem plots show original values and allow samples to be reconstructed, but are unwieldy with larger data sets
+  - Histograms are the "classic" way to view a distribution of continuous measurements
+  - Histograms are sometimes confused with barplots owing to their similar appearance
+
+- A histogram plots continuous data by binning the number of continuous observations   - The size of this interval is known as the binwidth.
+  - Consider the horsepower data of the 32 cars in the mtcars dataset
+
+```{r}
+hist(mtcars$hp)
+```
+
+  - This histogram uses binwidths of 50 units spanning the range of the data, centered roughly in the range of 75 to 150, tapering off on the right (this is known as a right or positive skew
+  - The accuracy of a histogram as a representation of the shape of a distribution of measurements depends solely upon the widths of the intervals used to bin the data.
   
+- Binwidths can be modified by supplying a vector of "breaks" to the hist command
+
+```{r}
+hist(mtcars$hp,breaks=seq(0,400,25),
+  col="gray",main="Horsepower",xlab="HP")
+abline(v=c(mean(mtcars$hp),median(mtcars$hp)),
+      lty=c(2,3),lwd=2)
+legend("topright",
+      legend=c("mean HP","median HP"), lty=c(2,3),lwd=2)
+```
+
+### Boxplots
+
+- Create box-whisker plots with the boxplot() command
+
+```{r}
+boxplot(mtcars$mpg,names=c('mpg'))
+```
+
+![](images/boxplot-options.png)
+
+```{r}
+boxplot(mtcars$mpg,names=c('mpg'),show.names=TRUE,
+          horizontal=TRUE,xlab="value",col="green")
+```
 
