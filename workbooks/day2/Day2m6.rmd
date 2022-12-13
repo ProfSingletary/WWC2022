@@ -289,7 +289,7 @@ abs_loop <- function(vec) {   # create a function to set abs value
     }
     vec
 }
-abs_loop(-10000:-1)   # call the function
+#abs_loop(-10000:-1)   # uncomment to call the function
 ```
 
 - abs_vec (below) is vectorized
@@ -302,7 +302,7 @@ abs_vec <- function(vec) {  # create a function to set abs value
     vec[negs] <- vec[negs] * -1
     vec
 }
-abs_vec(-10000:-1)   # call the function
+#abs_vec(-10000:-1)   # uncomment to call the function
 ```
 
 - You can use R’s <- assignment operator, which is also vectorized, to save a new set of values over an old set
@@ -368,4 +368,60 @@ row.totals.col
   - sapply returns the same results as lapply but in an array form
   - All apply functions allow for additional arguments to be passed to FUN; most via an ellipsis
 
+### Writing Functions
 
+- Functions have 3 parts: an argument list (i.e. the "formals"), a body, and an environment
+  - Functions in R are objects, just as vectors and data frames are objects
+  - This property is often referred to as "first-class functions"
+
+![](images/function-template.png)
+
+- Functions are defined using the function() function (really!)
+
+![](images/function-template2.png)
+
+- Arguments, tags, and the use of ellipsis depend on the function being defined
+  - If the function does not require any arguments, use empty parentheses ( )
+  - variables created in a function are local to that function
+  - explicit return statements are usually not required
+
+### To Return … or Not to Return
+
+- The last expression evaluated in a function becomes the return value, the result of invoking the function.
+
+```{r}
+f <- function(x) {
+    if (x < 10) {
+        0
+    } else {
+        10
+    }
+}
+
+f(5)
+f(15)
+```
+
+- "Generally, I think it’s good style to reserve the use of an explicit return() for when you are returning early, such as for an error, or a simple case of the function. This style of programming can also reduce the level of indentation, and generally make functions easier to understand because you can reason about them locally."
+
+- Hadley Wickham, "Advanced R", http://adv-r.had.co.nz/Functions.html
+
+![](images/function-with-return.png)
+
+### R Packages
+
+- The fundamental unit of shareable code in R is the package. 
+  - A package bundles together code, data, documentation, and tests, and is easy to share with others.
+  - When you load a package, R checks whether any objects in the package clash with other objects that are accessible in the present session
+
+```{r}
+#install.packages("spatstat")
+#library("spatstat")
+#install.packages("car")
+#library("car")
+```
+
+![](images/package-shadow.png)
+
+- This warning indicates that the two packages each have an object with the same name of "ellipse".
+  - R notifies you that the object masked (aka shadowed"), use package::object to access it
