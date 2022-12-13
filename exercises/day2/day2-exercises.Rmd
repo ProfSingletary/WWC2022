@@ -8,7 +8,19 @@ date: "2022-12-08"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-###Module 6 Exercise
+### Module 5 Exercise
+
+- The following data frame provides examples of various argument matching types.
+
+- Reproduce the data frame in R and write it to a .csv file (row.names=FALSE). Then delete the data frame from your environment, read the .csv file back in and display the data.
+
+![](images/mod5-table.png)
+
+```{r}
+
+```
+
+### Module 6 Exercise
 
 - Design a for loop which analyzes a list of various data types and characterizes the elements in a data frame
 
@@ -25,6 +37,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](images/mod6-output.png)
 
+
+```{r}
+
+```
+
+### Module 7 Exercise
+
+- A tutor knows that the length of time taken to complete a certain statistics question by first-year undergraduate students, X, is normally distributed with a mean of 17 minutes and a standard deviation of 4.5 minutes.
+
+- What is the probability a randomly selected undergraduate takes more than 20 minutes to complete the question?
+
+- What’s the chance that a student takes between 5 and 10 minutes to finish the question?
+
+- Find the time that marks off the slowest 10 percent of students.
 
 ```{r}
 
