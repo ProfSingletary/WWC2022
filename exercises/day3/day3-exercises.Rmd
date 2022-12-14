@@ -1,0 +1,41 @@
+---
+title: "day3-exercises"
+output: html_document
+date: "2022-12-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Module 9 Exercise 1
+
+- Use the mtcars dataset to model fuel efficiency, measured in miles per gallon (MPG), in terms of the overall weight of the vehicle (in thousands of pounds).
+
+- Plot the data—mpg on the y-axis and wt on the x-axis.
+
+- Fit the simple linear regression model. Add the fitted line to the plot.
+
+- Interpret the point estimate of the slope. Is the effect of wt on mean mpg estimated to be statistically significant?
+
+- Produce a point estimate and associated 95 percent PI for a car that weighs 6,000 lbs. Do you trust the model to predict observations accurately for this value of the explanatory variable? Why or why not?
+
+```{r}
+
+```
+
+### Module 9 Exercise 2
+
+A cryptocurrency broker is interested in predicting NFT (non-fungible token) sales from advertising. The data is provided in the tab-separated text file NFTSales.txt found in this module.
+
+adverts: The independent predictor variable; the amount invested in advertising for 200 NFTs before release.
+
+sales: The dependent variable, NFT Sales (in dollars) the week after release
+
+Run a regression analysis on this data as you did in Programming Assignment 9A and show the results of a prediction if the broker invests $2500 in advertising.
+
+
+```{r}
+
+```
+

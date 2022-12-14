@@ -1,0 +1,91 @@
+---
+title: "day3-exercises"
+output: html_document
+date: "2022-12-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Module 9 Exercise 1
+
+- Use the mtcars dataset to model fuel efficiency, measured in miles per gallon (MPG), in terms of the overall weight of the vehicle (in thousands of pounds).
+
+- Plot the data—mpg on the y-axis and wt on the x-axis.
+
+- Fit the simple linear regression model. Add the fitted line to the plot.
+
+- Interpret the point estimate of the slope. Is the effect of wt on mean mpg estimated to be statistically significant?
+
+- Produce a point estimate and associated 95 percent PI for a car that weighs 6,000 lbs. Do you trust the model to predict observations accurately for this value of the explanatory variable? Why or why not?
+
+```{r}
+# mtcars-analysis.R
+# Use the mtcars dataset to model fuel efficiency, measured
+# in miles per gallon (MPG), in terms of the overall weight
+# of the vehicle (in thousands of pounds).
+#
+# Plot the data-mpg on the y-axis and wt on the x-axis.
+#
+plot(mtcars$mpg~mtcars$wt,xlab="Weight (lbs/1000)",ylab="MPG")
+# Fit the simple linear regression model. Add the fitted line to the plot.
+#
+carfit <- lm(mpg~wt,data=mtcars)
+carfit
+abline(carfit,lwd=2)
+#
+# Interpret the point estimate of the slope. Is the effect of
+# wt on mean mpg estimated to be statistically significant?
+#
+summary(carfit) # mean MPG = 37.28 - 5.34*weight
+#
+# For each extra 1000lbs of weight, the mean MPG decreases by
+# 5.34; p-value for slope is very small---result is statistically
+# significant---strong evidence to suggest that mean MPG changes
+# according to weight.
+#
+# Produce a point estimate and associated 95 percent PI for a car
+# that weighs 6,000 lbs. Do you trust the model to predict
+# observations accurately for this value of the explanatory
+# variable? Why or why not?
+#
+predict(carfit,newdata=data.frame(wt=6),interval="prediction",level=0.95)
+#
+# Predicting at 6000lbs seems untrustworthy. Extrapolation is far enough
+# outside the range of the observed data such that the associated prediction
+# interval has a lower limit that is negative, which makes no sense in
+# terms of the response variable of MPG.
+```
+
+### Module 9 Exercise 2
+
+A cryptocurrency broker is interested in predicting NFT (non-fungible token) sales from advertising. The data is provided in the tab-separated text file NFTSales.txt found in this module.
+
+adverts: The independent predictor variable; the amount invested in advertising for 200 NFTs before release.
+
+sales: The dependent variable, NFT Sales (in dollars) the week after release
+
+Run a regression analysis on this data as you did in Programming Assignment 9A and show the results of a prediction if the broker invests $2500 in advertising.
+
+
+```{r}
+# NFTSales.R
+
+# read the data
+NFTSales <- read.table('NFTSales.txt',sep='\t', header=TRUE)
+
+# plot the data
+plot(NFTSales$sales ~ NFTSales$adverts, xlab='Advertising $', ylab='Sales $')
+
+# linear regression
+NFTSales.lm <- lm(sales~adverts,data=NFTSales)
+
+# show the fit line
+abline(NFTSales.lm,lwd=2)
+
+# summarize and predict for 2500
+summary(NFTSales.lm)
+predict(NFTSales.lm, newdata=data.frame(adverts=2500), interval="prediction",level=0.95)
+```
+
