@@ -1,0 +1,23 @@
+install.packages("tidyverse")
+library(tidyverse)
+library(modelr)
+options(na.action = na.warn) # handle missing values with a warning
+
+ggplot(sim1, aes(x, y)) + geom_point()
+
+runif(10, 1, 5)  # 10 values between 1 and 5
+
+models <- tibble(y = runif(50, -20, 40), m = runif(50, -5, 5))
+ggplot(sim1, aes(x, y)) +
+     geom_abline(aes(intercept = y, slope = m), 
+                 alpha = 1/4, data = models) + 
+     geom_point()
+
+
+sim1_mod <- lm(y ~ x, data = sim1)
+coef(sim1_mod)
+ggplot(sim1, aes(x, y)) +
+     geom_abline(aes(intercept = 4.220822, slope = 2.051533)) +
+     geom_point()
+
+
